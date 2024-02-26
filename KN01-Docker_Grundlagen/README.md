@@ -56,3 +56,8 @@ Da die -it-Flags verwendet werden, läuft der Container so lange im Vordergrund,
     4. `docker tag mariadb:latest kaama02/m347:mariadb`
     5. `docker push kaama02/m347:nginx`
     6. `docker push kaama02/m347:mariadb`
+
+`docker tag nginx:latest username/reponame:nginx`: Dieser Befehl nimmt das Docker-Image genannt nginx mit dem Tag latest (was die neueste Version des Images angibt) und erstellt ein neues Tag für dieses Image. Das neue Tag lautet username/reponame:nginx.
+Tags werden verwendet, um verschiedene Versionen desselben Images zu kennzeichnen, z. B. latest, v1.0, development usw. So können Benutzer und Systeme bestimmte Versionen eines Images identifizieren und verwenden.
+
+Mit dem Befehl `docker push` wird ein lokales Docker-Image in ein Docker-Repository hochgeladen.
