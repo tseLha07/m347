@@ -32,8 +32,8 @@ Nach dem Herunterladen des Images versuchte Docker, den Container zu starten, wa
 Da die -it-Flags verwendet werden, läuft der Container so lange im Vordergrund, bis Sie die interaktive Sitzung beendet wird.
 (nicht jedes Image im Hintergrund ausgeführt werden kann)
     - `docker exec -it my_nginx /bin/bash` Eine interaktive Shell eines laufenden Containers, nämlich my_nginx, wird geöffnet.
-    - `service nginx status` 
     ![](images/4.png) <br>
+    - `service nginx status`
     - `docker stop my_nginx` Mit diesem Befehl wird der Container mit dem Namen my_nginx beendet.
     - `docker ps -a --filter "name=my_nginx"` Der Status des Containers "my_nginx" wird überprüft.
     ![](images/5.png) <br>
