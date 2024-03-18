@@ -68,7 +68,7 @@
     <strong>Unterschiede:</strong> <br>
     1. Der Unterschied besteht darin, dass die Container mit dem Standard-Bridge-Netzwerk nur teilweise verbunden sind, nämlich nur über die IP-Adresse, die sich im Laufe der Zeit ändern kann. Wenn ich jedoch mein eigenes Netzwerk erstelle, kann ich Containernamen verwenden, die sich im Laufe der Zeit nicht ändern.
 
-3. Betrachten Sie nun KN02.
+3. Betrachten Sie nun KN02. <br>
     In KN02, the containers in the same gateway could not communicate via the container name but with the (--link), the name is linked with the IP address, which enables the container to communicate.
 
     - In welchem Netzwerk befanden sich die beiden Container? <br>
