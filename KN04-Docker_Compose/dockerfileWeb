@@ -1,0 +1,12 @@
+FROM php:8.0-apache
+
+ENV DB_HOST=m347-kn04a-db \
+    DB_USER=root \
+    DB_PASSWORD=root 
+
+COPY db.php /var/www/html/db.php
+COPY info.php /var/www/html/info.php
+
+RUN docker-php-ext-install mysqli
+
+EXPOSE 80

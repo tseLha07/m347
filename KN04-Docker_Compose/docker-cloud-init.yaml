@@ -1,0 +1,107 @@
+#cloud-config
+# source: https://gist.github.com/syntaqx/9dd3ff11fb3d48b032c84f3e31af9163
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUBo+qnNu5xxM9vfz4C04M36FHxHNrEMdm5TkFj1/SfVtqunlUOeMpu7nFCZZKnX8HYwf/MkjcBiTYAgncxku8grwl6XuW/pcvmb6/ghSIaw4xtRRSzit7omqJ5d8kXB3+Nd1aaMHsjfly4nkaqswhySVXQqr8Hw6DbWVw8jLLVKEE+5NZHY33hJkhJwK4blCllsGpmQaKi1qxjsN0hZOWNK01iJAydwD8t2xJ0NOYbq8Qas5IyPnRN7SPxvEhIP6WLQ6Ym6Dmf8FwNW1cHLTKabgjzt5f/HKUkKS89dPd3fn4nnFli1BOMECGUIvVlOw2pQNri7+04OOfn2FGlqr5
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcb7reFZ0ycalWUpfU2uzOBY2AYqy9tLgEbhKIj9XMjie8NSw9Mx++3hAaQyY1ydKNyFFnKMU9/PO2qRv3jMqJbQ0eMOSDBQ6yIXIIy+Y/BHG37HD4Aa5RSGomrBA8XrHnSUI0ReX0L1/hJ/2kZA7vlKe4DDRA5GhOW5G4MQmUQJqvcx6x6Yl6JSX0/N27clTUNlYzszYnqwB7okMORRPQveyVmGg3P7TlGo79O8tXnG/ZIKs7XjwqJvngo2DkcNegoSW6gUAwc9YAEAvyRgIBgydCme3/6m5tFbSQaU64q2Vd/x0HMFAhEaclR4LbRa2NNhkvF70pncWQH90rufOv
+disable_root: false
+package_update: true
+package_upgrade: true
+groups:
+  - docker
+system_info:
+  default_user:
+    groups: [docker]
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - unattended-upgrades
+final_message: "The system is finally up, after $UPTIME seconds"
+write_files:
+  - path: /home/ubuntu/src/db.php
+    permissions: "0644"
+    content: |
+      <?php
+        //database
+        $servername = "m347-kn04a-db"; // Private IP Adresse des DB Server
+        $username = "root";
+        $password = "example";
+        //$dbname = "example-database";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password);//, $dbname);
+        // Check connectionsa<
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "select Host, User from mysql.user;";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()){
+          echo($row["Host"] . " / " . $row["User"] . "<br />");
+        }
+        //var_dump($result);
+      ?>
+  - path: /home/ubuntu/src/info.php
+    permissions: "0644"
+    content: |
+      <?php
+        phpinfo();
+      ?>
+  - path: /home/ubuntu/dockerfile
+    permissions: "0644"
+    content: |
+      FROM php:8.0-apache
+      WORKDIR /var/www/html/
+      COPY src .
+      EXPOSE 80
+      RUN ["docker-php-ext-install", "mysqli"]
+  - path: /home/ubuntu/docker-compose.yml
+    permissions: "0644"
+    content: |
+      version: '3.8'
+      name: kn04-compose
+      services:
+        database:
+          image: mariadb:latest
+          container_name: m347-kn04a-db
+          ports:
+            - "3306:3306"
+          environment:
+            - MARIADB_ROOT_PASSWORD=example
+          networks:
+            - kn04-network
+        web:
+          build: .
+          container_name: m347-kn04a-web
+          ports:
+            - "80:80"
+          depends_on:
+            - database
+          networks:
+            - kn04-network
+      networks:
+        kn04-network:
+          driver: bridge
+          ipam:
+            config:
+              - subnet: 172.10.0.0/16
+                ip_range: 172.10.5.0/24
+                gateway: 172.10.5.254
+runcmd:
+  - mkdir -p /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  - systemctl enable docker
+  - systemctl start docker
+  - cd /home/ubuntu
+  - sudo docker compose up -d
