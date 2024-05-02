@@ -1,0 +1,25 @@
+#cloud-config
+# source: https://thenewstack.io/deploy-a-kubernetes-cluster-on-ubuntu-server-with-microk8s/
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin, microk8s
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUBo+qnNu5xxM9vfz4C04M36FHxHNrEMdm5TkFj1/SfVtqunlUOeMpu7nFCZZKnX8HYwf/MkjcBiTYAgncxku8grwl6XuW/pcvmb6/ghSIaw4xtRRSzit7omqJ5d8kXB3+Nd1aaMHsjfly4nkaqswhySVXQqr8Hw6DbWVw8jLLVKEE+5NZHY33hJkhJwK4blCllsGpmQaKi1qxjsN0hZOWNK01iJAydwD8t2xJ0NOYbq8Qas5IyPnRN7SPxvEhIP6WLQ6Ym6Dmf8FwNW1cHLTKabgjzt5f/HKUkKS89dPd3fn4nnFli1BOMECGUIvVlOw2pQNri7+04OOfn2FGlqr5
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCGJ6JIV0R7iQ4FsSiNO9zl68es+J03+mw13L4KaV2gKbMWzZzryysiyPf/O4dzZzYgE6gJQbnfw+TeEvX+fketW1XZpGB6Y8D9FFkJjFOgGyg5OC41F/1qyA9NgjRfD9zhhkyuB8eJqvGY3pgtEgwcS5Ct/V4DZg0FxQS/Uxk0e8hR14vufzn85srskptxuCoeNQljgDQcAs7FP1aNsz3QZrB7TnUL8tWME5kd7KnwbWJD3xnXODT1tPz3vQ3j9eOGX38xMvLsMqo/JJ+1acQqKkso+x74rWo4NSLRF620EpTV9NO0V6gIU2i2bSmQONizk6gehT5jwCZG7KsEnUZR
+groups:
+  - microk8s
+system_info:
+  default_user:
+    groups: [microk8s]
+ssh_pwauth: false
+disable_root: false
+package_update: true
+package_upgrade: true
+packages:
+  - curl
+runcmd:
+  - sudo snap install microk8s --classic
+  - mkdir /home/ubuntu/.kube

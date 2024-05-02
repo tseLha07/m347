@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nginx_container_1:
+    image: nginx
+    volumes:
+      - my_volume:/usr/share/nginx/html
+      - C:/GitHubRepositories/m347/KN05-Arbeit_mit_Speicher/KN05a/:/usr/share/nginx/html/kn05c/
+    tmpfs:
+      - /usr/share/nginx/html
+
+  nginx_container_2:
+    image: nginx
+    volumes:
+      - my_volume:/usr/share/nginx/html
+
+volumes:
+  my_volume:
+    external: true
