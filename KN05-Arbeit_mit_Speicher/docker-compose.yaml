@@ -1,19 +1,22 @@
-version: '3'
-
+version: '3.8'
 services:
-  nginx_container_1:
+  nginx1:
     image: nginx
     volumes:
-      - my_volume:/usr/share/nginx/html
-      - C:/GitHubRepositories/m347/KN05-Arbeit_mit_Speicher/KN05a/:/usr/share/nginx/html/kn05c/
-    tmpfs:
-      - /usr/share/nginx/html
+      - type: volume
+        source: kn05-b_shared_volume
+        target: /usr/share/nginx/html
+        volume:
+          nocopy: true
+      - type: bind
+        source: C:/GitHubRepositories/m347/KN05-Arbeit_mit_Speicher/KN05a/
+        target: /usr/share/nginx/html/bind-mount
+      - type: tmpfs
+        target: /usr/share/nginx/html/tmpfs
 
-  nginx_container_2:
+  nginx2:
     image: nginx
     volumes:
-      - my_volume:/usr/share/nginx/html
-
+      - kn05-b_shared_volume:/usr/share/nginx/html
 volumes:
-  my_volume:
-    external: true
+  kn05-b_shared_volume:

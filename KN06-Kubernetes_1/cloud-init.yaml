@@ -8,7 +8,7 @@ users:
     shell: /bin/bash
     ssh_authorized_keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUBo+qnNu5xxM9vfz4C04M36FHxHNrEMdm5TkFj1/SfVtqunlUOeMpu7nFCZZKnX8HYwf/MkjcBiTYAgncxku8grwl6XuW/pcvmb6/ghSIaw4xtRRSzit7omqJ5d8kXB3+Nd1aaMHsjfly4nkaqswhySVXQqr8Hw6DbWVw8jLLVKEE+5NZHY33hJkhJwK4blCllsGpmQaKi1qxjsN0hZOWNK01iJAydwD8t2xJ0NOYbq8Qas5IyPnRN7SPxvEhIP6WLQ6Ym6Dmf8FwNW1cHLTKabgjzt5f/HKUkKS89dPd3fn4nnFli1BOMECGUIvVlOw2pQNri7+04OOfn2FGlqr5
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCGJ6JIV0R7iQ4FsSiNO9zl68es+J03+mw13L4KaV2gKbMWzZzryysiyPf/O4dzZzYgE6gJQbnfw+TeEvX+fketW1XZpGB6Y8D9FFkJjFOgGyg5OC41F/1qyA9NgjRfD9zhhkyuB8eJqvGY3pgtEgwcS5Ct/V4DZg0FxQS/Uxk0e8hR14vufzn85srskptxuCoeNQljgDQcAs7FP1aNsz3QZrB7TnUL8tWME5kd7KnwbWJD3xnXODT1tPz3vQ3j9eOGX38xMvLsMqo/JJ+1acQqKkso+x74rWo4NSLRF620EpTV9NO0V6gIU2i2bSmQONizk6gehT5jwCZG7KsEnUZR
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOv0NA/YZvPfx8D0dvq/ihLor+flB/+0WZtLezXonS+RVrUn6r3FBqmHD+O0ebTcwz82l/ckDFbQhWxorP4jRISo6ZmMLItJbi5XR78w6yQzQHrBd6lOfI+hzpEPKFEMOax48w28WhHd7jcDQgyDSMb8IKpuUAioPVOmXhaJr/1ZNLdtua4ZIaVqgabFV2Br2Oi3u8S/4JtE8EU9pvtCvZ8pkyseI6OiQhajJAu3m9nJCYBIwwl7f8qVmDNSNru2yvQ4BROcK2kZkBMk9dfF5fSD2hzCibKVS4XtYX2h0BGlwkD5yJk20104ibnUkk483TOsM7Yu9NLXu1uKkgI6dB
 groups:
   - microk8s
 system_info:
@@ -21,5 +21,6 @@ package_upgrade: true
 packages:
   - curl
 runcmd:
+  - alias kubectl='microk8s kubectl'
   - sudo snap install microk8s --classic
   - mkdir /home/ubuntu/.kube

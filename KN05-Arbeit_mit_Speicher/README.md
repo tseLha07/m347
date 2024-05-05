@@ -45,5 +45,10 @@ Die Konsole des zweiten Containers wird geöffnet, um den Inhalt der gleichen Da
 ## C. Speicher mit docker compose (30%)
 
 #### 1. Auszug mit dem Befehl mount im ersten Container, der zeigt, dass alle drei Speichertypen hinzugefügt wurden.
+![](images/7.png) <br>
 
 #### 2. Auszug mit dem Befehl mount im zweiten Container, der zeigt, dass der Speichertyp hinzugefügt wurde.
+![](images/8.png) <br>
+
+![](images/9.png) <br>
+
