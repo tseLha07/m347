@@ -1,5 +1,4 @@
 #cloud-config
-# source: https://thenewstack.io/deploy-a-kubernetes-cluster-on-ubuntu-server-with-microk8s/
 users:
   - name: ubuntu
     sudo: ALL=(ALL) NOPASSWD:ALL
