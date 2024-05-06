@@ -2,7 +2,7 @@
 
 ## A. Installation 
 #### `microk8s kubectl get nodes`
-<strong> Node 1: </strong>
+<strong> Node 1: </strong> <br>
 ![](images/1.png) <br>
 
 ## B. Verständnis für Cluster

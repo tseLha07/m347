@@ -1,29 +1,6 @@
 # KN06 Kubernetes II
 
 ## A. Begriffe und Konzepte erlernen
-#### 1. Unterschied zwischen **Pods** und **Replicas** mit eigenen Worten.
-
-**Pods**: <br>
- A Pod is the smallest unit you can deploy in Kubernetes, consisting of one or more containers sharing network and storage. Pods are temporary and can be recreated or moved when necessary. <br>
-
-**Replicas**: <br>
-Replicas are identical copies of a Pod, ensuring that multiple Pods run to handle load and increase reliability. If one Pod fails, Kubernetes automatically creates another to replace it.
-
-
-#### 2. Unterschied zwischen **Service** und **Deployment** mit eigenen Worten.
-
-**Service**: <br>
-A Service gives a reliable way to reach a group of Pods. It provides a stable network address or name, making it easier to access the Pods without knowing their specific details. <br>
-
-**Deployment**: <br>
- A Deployment is a template that tells Kubernetes how many copies of a specific Pod should be running. It helps keep your application running smoothly and simplifies updates. <br>
-
-
-#### 3. Welches Problem löst **Ingress**? Beantworten Sie die Frage in eigenen Worten.
-
-Ingress helps expose applications inside a Kubernetes cluster to the outside world using simple URLs. It provides rules to handle incoming HTTP/HTTPS traffic, so you can access your app through a friendly domain name instead of specific IP addresses or ports. <br>
-
-#### 4. Für was ist ein **statefulset**? Beantworten Sie die Frage in eigenen Worten. Geben Sie ein mögliches Beispiel - aber keine Datenbank.
 
 ### Difference between Pods and Replicas
 
