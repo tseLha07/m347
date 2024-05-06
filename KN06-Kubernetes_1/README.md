@@ -8,10 +8,10 @@
 ## B. Verständnis für Cluster
 
 #### 1. Rufen Sie microk8s kubectl get nodes auf einem zweiten der drei Instanzen auf. <br>
-<strong> Node 2: </strong>
+<strong> Node 2: </strong> <br>
 ![](images/2.png) <br>
 
-<strong> Node 3: </strong>
+<strong> Node 3: </strong> <br>
 ![](images/3.png) <br>
 
 #### 2. Rufen Sie den Befehl microk8s status auf und schauen Sie die ersten paar Zeilen an (vor "addons"). Was bedeuten diese? <br>
@@ -23,7 +23,7 @@ The first line `microK8s is running` indicates that the MicroK8s service is runn
 On the node to be removed: <br>
 ![](images/5.png) <br>
 
-On the master node:
+On the master node:  <br>
 ![](images/6.png) <br>
 
 #### 4. Fügen Sie nun den Node wieder dem Cluster hinzu, aber dieses Mal als Worker (--worker): <br>
@@ -35,9 +35,9 @@ This is because one of the nodes is now a worker node and these do not run on th
 
 
 #### 6. Rufen Sie nochmals `microk8s kubectl get nodes` auf, sowohl auf einem der Master als auch auf dem Worker. Dokumentieren Sie die Resultate mit Screenshots. Wieso stimmt dies überein mit dem Result des Befehls microk8s status ? <br>
-master:
+master: <br>
 ![](images/10.png) <br>
-worker:
+worker: <br>
 ![](images/9.png) <br>
 As the worker node does not work on the control plane, it also has no status. This means that it can only be called up by the master node.
 
