@@ -1,0 +1,15 @@
+FROM node:21-alpine
+LABEL author="TM"
+
+WORKDIR /app
+
+COPY . /app
+
+RUN npm i
+
+HEALTHCHECK --interval=3s --timeout=5s\
+    CMD curl -f localhost:3001/ || exit 1
+
+EXPOSE 3001
+
+ENTRYPOINT [ "npm", "run", "start" ]

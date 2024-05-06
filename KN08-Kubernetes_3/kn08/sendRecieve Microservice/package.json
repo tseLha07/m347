@@ -1,0 +1,21 @@
+{
+  "name": "microservice2",
+  "version": "1.0.0",
+  "description": "Microservice for Kn08",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=prod node server.js",
+    "dev": "NODE_ENV=local nodemon server.js"
+  },
+  "author": "Timofey Makhankov",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mariadb": "^2.5.3",
+    "nodemon": "^3.1.0"
+  }
+}
